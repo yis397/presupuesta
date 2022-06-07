@@ -24,7 +24,7 @@ class DbHive {
     print('${box.isOpen} inicializado');
   }
 
-  setBloques(List<dynamic> materiales, String nom) async {
+  setMaterial(List<dynamic> materiales, String nom) async {
     await box.put(nom, materiales);
     print("agregado");
   }
@@ -34,20 +34,20 @@ class DbHive {
     print(bloques);
   }
 
-  List<dynamic> getMateriales(int i) {
+  Future<List<dynamic>> getMateriales(int i) async {
     switch (i) {
       case 0:
-        return box.get("bloques") ?? [];
+        return await box.get("bloques") ?? [];
       case 1:
-        return box.get("cementos") ?? [];
+        return await box.get("cementos") ?? [];
       case 2:
-        return box.get("arenas") ?? [];
+        return await box.get("arenas") ?? [];
       case 3:
-        return box.get("gravas") ?? [];
+        return await box.get("gravas") ?? [];
       case 4:
-        return box.get("varillas") ?? [];
+        return await box.get("varillas") ?? [];
       case 5:
-        return box.get("piedras") ?? [];
+        return await box.get("piedras") ?? [];
       default:
         return [];
     }

@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:meta/meta.dart';
+import 'package:prestpuesta/class/materiales.dart';
 import 'package:prestpuesta/db/DbHive.dart';
 import 'package:prestpuesta/helpers/index.dart';
 part 'materiales_event.dart';
@@ -20,8 +21,9 @@ class MaterialesBloc extends Bloc<MaterialesEvent, MaterialesState> {
     "Largo": "largo",
     "unidad": "",
   };
-  List<List<dynamic>> listaMateriales = [];
+
   late DbHive db;
+  late Materiales materiales;
   MaterialesBloc()
       : super(MaterialesState(
           i: 0,
@@ -78,13 +80,18 @@ class MaterialesBloc extends Bloc<MaterialesEvent, MaterialesState> {
   }
 
   initDb() {
+    materiales = Materiales();
     db = DbHive();
-    /* Timer(
-        Duration(seconds: 2),
+    Timer(
+        Duration(seconds: 4),
         () => {
               for (var i = 0; i < 6; i++)
-                {listaMateriales.add(db.getMateriales(i))}
-            });*/
+                {
+                  db
+                      .getMateriales(i)
+                      .then((value) => materiales.setMateriales(i, value))
+                }
+            });
   }
 
   get() {

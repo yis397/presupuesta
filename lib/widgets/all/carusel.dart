@@ -32,6 +32,7 @@ class Carrusel extends StatelessWidget {
                 )
               : ItemHome(
                   titulo: i["nom"],
+                  i: i,
                 ));
         });
       }).toList(),
@@ -73,27 +74,31 @@ class ItemMaterial extends StatelessWidget {
 }
 
 class ItemHome extends StatelessWidget {
-  const ItemHome({required this.titulo, Key? key}) : super(key: key);
+  const ItemHome({required this.titulo, required this.i, Key? key})
+      : super(key: key);
   final String titulo;
+  final int i;
 
   @override
   Widget build(BuildContext context) {
+    final matBloc = BlocProvider.of<CalculoBloc>(context);
     final size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       height: size.height * .3,
       width: size.width * .7,
       child: MaterialButton(
           onPressed: () {
+            matBloc.add(OnCambio(i: i));
             Navigator.pushNamed(context, "calculo");
           },
           child: Container(
-            child: Text(titulo),
             height: size.height * .25,
             width: 300,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
               color: Colors.amber,
             ),
+            child: Text(titulo),
           )),
     );
   }

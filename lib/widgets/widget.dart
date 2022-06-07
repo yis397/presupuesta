@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prestpuesta/bloc/bloc.dart';
+import 'package:prestpuesta/bloc/calculo/calculo_bloc.dart';
 import 'package:prestpuesta/theme/theme.dart';
 part "all/titulo.dart";
 part "all/carusel.dart";

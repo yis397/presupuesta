@@ -2,22 +2,28 @@ part of "../widget.dart";
 
 class WlstaDesp extends StatefulWidget {
   List<String> lista;
-
-  WlstaDesp(this.lista, {Key? key}) : super(key: key);
+  String nombre;
+  WlstaDesp(this.lista, this.nombre, {Key? key}) : super(key: key);
 
   @override
   State<WlstaDesp> createState() => _WlstaDespState();
 }
 
 class _WlstaDespState extends State<WlstaDesp> {
-  String dropdownValue = "Unidad";
+  String dropdownValue = "";
+
   @override
   Widget build(BuildContext context) {
     List<String> list = [];
     list.addAll(widget.lista);
     final matBloc = BlocProvider.of<MaterialesBloc>(context);
     return DropdownButton<String>(
-      hint: Text(dropdownValue),
+      hint: Column(
+        children: [
+          Text(widget.nombre),
+          Text(dropdownValue),
+        ],
+      ),
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
       style: const TextStyle(color: Colors.deepPurple),
