@@ -16,7 +16,7 @@ class HomeLayout extends StatelessWidget {
         Carrusel(
             size: size,
             lista: [
-              {"nom": "columna"}
+              {"nom": "columna", "index": 0}
             ],
             frx: .7,
             tipo: 2),

@@ -2,13 +2,17 @@ part of "../widget.dart";
 
 class TextInputs extends StatelessWidget {
   final String nombre;
+  final String unidad;
   final TextInputType tipo;
   final double anch;
   final int val;
+  final int bloc;
   const TextInputs({
     required this.nombre,
+    required this.unidad,
     required this.val,
     required this.tipo,
+    required this.bloc,
     required this.anch,
     Key? key,
   }) : super(key: key);
@@ -16,6 +20,7 @@ class TextInputs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final matBloc = BlocProvider.of<MaterialesBloc>(context);
+    final calcBloc = BlocProvider.of<CalculoBloc>(context);
     return Container(
       margin: EdgeInsets.only(right: 20),
       width: anch,
@@ -23,10 +28,12 @@ class TextInputs extends StatelessWidget {
           autocorrect: false,
           keyboardType: tipo,
           decoration: InputDecorations.authInputDecoration(
-            hintText: nombre,
+            hintText: "$nombre/$unidad",
             labelText: nombre,
           ),
-          onChanged: (val) => matBloc.setValor(nombre, val),
+          onChanged: (val) => (bloc == 1
+              ? matBloc.setValor(nombre, val)
+              : calcBloc.setValor(nombre, val)),
           validator: (value) {
             if (value != null && value.length >= val) {
             } else {

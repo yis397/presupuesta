@@ -22,7 +22,10 @@ class Carrusel extends StatelessWidget {
           viewportFraction: frx,
           height: 200,
           onPageChanged: (i, ch) => {
-                if (tipo == 1) {matBloc.add(onSeleccionIndx(i))}
+                if (tipo == 1)
+                  {matBloc.add(onSeleccionIndx(i))}
+                else
+                  {print("hola")}
               }),
       items: lista.map((i) {
         return Builder(builder: (BuildContext context) {
@@ -31,8 +34,8 @@ class Carrusel extends StatelessWidget {
                   nom: i["nom"],
                 )
               : ItemHome(
+                  i: i["index"],
                   titulo: i["nom"],
-                  i: i,
                 ));
         });
       }).toList(),
@@ -88,7 +91,7 @@ class ItemHome extends StatelessWidget {
       width: size.width * .7,
       child: MaterialButton(
           onPressed: () {
-            matBloc.add(OnCambio(i: i));
+            matBloc.selectCalculo(0);
             Navigator.pushNamed(context, "calculo");
           },
           child: Container(

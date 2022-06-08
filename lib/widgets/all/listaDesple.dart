@@ -1,9 +1,11 @@
 part of "../widget.dart";
 
 class WlstaDesp extends StatefulWidget {
-  List<String> lista;
+  List<dynamic> lista;
   String nombre;
-  WlstaDesp(this.lista, this.nombre, {Key? key}) : super(key: key);
+  int typBloc;
+  WlstaDesp(this.lista, this.nombre, this.typBloc, {Key? key})
+      : super(key: key);
 
   @override
   State<WlstaDesp> createState() => _WlstaDespState();
@@ -14,9 +16,8 @@ class _WlstaDespState extends State<WlstaDesp> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> list = [];
-    list.addAll(widget.lista);
     final matBloc = BlocProvider.of<MaterialesBloc>(context);
+    final calBloc = BlocProvider.of<CalculoBloc>(context);
     return DropdownButton<String>(
       hint: Column(
         children: [
@@ -33,14 +34,20 @@ class _WlstaDespState extends State<WlstaDesp> {
       ),
       onChanged: (String? newValue) {
         setState(() {
-          dropdownValue = newValue!;
-          matBloc.setValor("unidad", newValue);
+          dropdownValue = newValue!.toString();
+          if (widget.typBloc == 1) {
+            matBloc.setValor(widget.nombre, newValue);
+          } else {
+            final valor = widget.lista
+                .firstWhere(((e) => e["id"] == int.parse(newValue)));
+            calBloc.setValor(widget.nombre, valor);
+          }
         });
       },
-      items: list.map<DropdownMenuItem<String>>((String value) {
+      items: widget.lista.map<DropdownMenuItem<String>>((dynamic value) {
         return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
+          value: (widget.typBloc == 1 ? value["nombre"] : value["id"]),
+          child: Text(value["nombre"]),
         );
       }).toList(),
     );

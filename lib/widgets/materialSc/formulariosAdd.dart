@@ -8,14 +8,18 @@ List<List> bloques = [
         nombre: "nombre",
         val: 2,
         tipo: TextInputType.text,
+        unidad: "",
+        bloc: 1,
       ),
       TextInputs(
         anch: 90,
         nombre: "precio",
         val: 1,
         tipo: TextInputType.number,
+        unidad: "mn",
+        bloc: 1,
       ),
-      WlstaDesp(["pza", "mill"], "unidad")
+      WlstaDesp(["pza", "mill"], "unidad", 1)
     ]),
     Row(children: [
       TextInputs(
@@ -23,18 +27,24 @@ List<List> bloques = [
         nombre: "Ancho",
         val: 1,
         tipo: TextInputType.number,
+        unidad: "cm",
+        bloc: 1,
       ),
       TextInputs(
         anch: 100,
         nombre: "Altura",
         val: 1,
         tipo: TextInputType.number,
+        unidad: "cm",
+        bloc: 1,
       ),
       TextInputs(
         anch: 100,
         nombre: "Largo",
         val: 1,
         tipo: TextInputType.number,
+        unidad: "cm",
+        bloc: 1,
       ),
     ]),
   ],
@@ -46,14 +56,18 @@ List<List> bloques = [
         nombre: "nombre",
         val: 2,
         tipo: TextInputType.text,
+        unidad: "",
+        bloc: 1,
       ),
-      WlstaDesp(["ton", "50kg"], "unidad")
+      WlstaDesp(["ton", "50kg"], "unidad", 1)
     ]),
     TextInputs(
       anch: 250,
       nombre: "precio",
       val: 1,
       tipo: TextInputType.number,
+      unidad: "mn",
+      bloc: 1,
     ),
   ],
 
@@ -65,14 +79,18 @@ List<List> bloques = [
         nombre: "nombre",
         val: 2,
         tipo: TextInputType.text,
+        unidad: "",
+        bloc: 1,
       ),
-      WlstaDesp(["ton", "m3"], "unidad")
+      WlstaDesp(["ton", "m3"], "unidad", 1)
     ]),
     TextInputs(
       anch: 250,
       nombre: "precio",
       val: 1,
       tipo: TextInputType.number,
+      unidad: "mn",
+      bloc: 1,
     ),
   ],
   //grava
@@ -83,14 +101,18 @@ List<List> bloques = [
         nombre: "nombre",
         val: 2,
         tipo: TextInputType.text,
+        unidad: "",
+        bloc: 1,
       ),
-      WlstaDesp(["ton", "m3"], "unidad")
+      WlstaDesp(["ton", "m3"], "unidad", 1)
     ]),
     TextInputs(
       anch: 250,
       nombre: "precio",
       val: 1,
       tipo: TextInputType.number,
+      unidad: "mn",
+      bloc: 1,
     ),
   ],
 //varilla
@@ -101,8 +123,10 @@ List<List> bloques = [
         nombre: "nombre",
         val: 2,
         tipo: TextInputType.text,
+        unidad: "",
+        bloc: 1,
       ),
-      WlstaDesp(["ton", "m3"], "unidad")
+      WlstaDesp(["ton", "m3"], "unidad", 1)
     ]),
     Row(children: [
       TextInputs(
@@ -110,8 +134,10 @@ List<List> bloques = [
         nombre: "precio",
         val: 1,
         tipo: TextInputType.number,
+        unidad: "mn",
+        bloc: 1,
       ),
-      WlstaDesp(["1/4", "1/8"], "calibre")
+      WlstaDesp(["1/4", "1/8"], "calibre", 1)
     ]),
   ],
 //piedras
@@ -122,14 +148,18 @@ List<List> bloques = [
         nombre: "nombre",
         val: 2,
         tipo: TextInputType.text,
+        unidad: "",
+        bloc: 1,
       ),
-      WlstaDesp(["ton", "m3"], "unidad")
+      WlstaDesp(["ton", "m3"], "unidad", 1)
     ]),
     TextInputs(
       anch: 250,
       nombre: "precio",
       val: 1,
       tipo: TextInputType.number,
+      unidad: "mn",
+      bloc: 1,
     ),
   ],
 ];

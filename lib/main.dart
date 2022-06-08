@@ -9,6 +9,9 @@ void main() {
       BlocProvider(
         create: (context) => MaterialesBloc(),
       ),
+      BlocProvider(
+        create: (context) => CalculoBloc(),
+      ),
     ],
     child: MyApp(),
   ));
