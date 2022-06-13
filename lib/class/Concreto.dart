@@ -1,5 +1,4 @@
 class Concreto {
-  List<double> concreto = [];
   double mqConcreto = 0;
   double presConcreto = 0;
   double precioCemen = 0;
@@ -18,7 +17,6 @@ class Concreto {
   String cemUnidad = "";
   String arenaUnidad = "";
   String gravaUnidad = "";
-  List<double> selConcreto = [];
   double totalPrecio = 0;
 /**0 cemento,1 grava, 2 arena, 3 agua */
 
@@ -61,7 +59,7 @@ class Concreto {
   }
 
   getConcre250(double mq) {
-    print("2500");
+    print("250");
     cantidadCemen = 374 * mq;
     cantidadGrava = 0.733 * mq;
     cantidadArena = 0.505 * mq;

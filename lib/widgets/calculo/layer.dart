@@ -44,6 +44,7 @@ class CalculoLayer extends StatelessWidget {
                                 })),
                         MaterialButton(
                             onPressed: () {
+                              if (state.i == 2) return;
                               if (!context.read<MaterialesBloc>().isValidForm())
                                 return;
                             },

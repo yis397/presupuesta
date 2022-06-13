@@ -1,3 +1,5 @@
+part of 'helpers.dart';
+
 List<Map<String, dynamic>> calculoMuro(
     double l,
     double a,

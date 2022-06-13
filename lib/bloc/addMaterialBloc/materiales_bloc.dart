@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:prestpuesta/class/materiales.dart';
-import 'package:prestpuesta/helpers/index.dart';
+import 'package:prestpuesta/helpers/helpers.dart';
 part 'materiales_event.dart';
 part 'materiales_state.dart';
 
@@ -9,12 +9,14 @@ class MaterialesBloc extends Bloc<MaterialesEvent, MaterialesState> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<Map<String, String>> textFieldsValue = [];
   Map<String, String> valores = {
-    "nombre": "nombres",
-    "precio": "precios",
-    "Ancho": "ancho",
-    "Altura": "altura",
-    "Largo": "largo",
-    "unidad": "",
+    'nombre': '',
+    'precio': '',
+    'Ancho': '',
+    'Altura': '',
+    'Largo': '',
+    'unidad': '',
+    'peso': '',
+    'pulgada': ''
   };
   final Materiales materiales = Materiales();
   MaterialesBloc()
@@ -39,25 +41,39 @@ class MaterialesBloc extends Bloc<MaterialesEvent, MaterialesState> {
   }
 
   bool isValidForm() {
-    if (valores["unidad"] == "") {
+    if (valores['unidad'] == '') {
       return false;
     }
     return formKey.currentState?.validate() ?? false;
   }
 
   setValor(String nom, String value) {
+    if (nom == "pulgada") {
+      switch (value) {
+        case '1/4':
+          valores['peso'] = '.991';
+          break;
+        case '1/8':
+          valores['peso'] = '.991';
+          break;
+        default:
+      }
+      return;
+    }
     valores[nom] = value;
   }
 
   resetValor() {
     formKey.currentState?.reset();
     valores = {
-      "nombre": "",
-      "precio": "",
-      "Ancho": "",
-      "Altura": "",
-      "Largo": "",
-      "unidad": "",
+      'nombre': '',
+      'precio': '',
+      'Ancho': '',
+      'Altura': '',
+      'Largo': '',
+      'unidad': '',
+      'peso': '',
+      'pulgada': ''
     };
   }
 }

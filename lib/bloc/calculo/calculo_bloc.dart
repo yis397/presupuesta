@@ -2,8 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:prestpuesta/class/materiales.dart';
 import 'package:prestpuesta/class/valoresCalculo.dart';
-import 'package:prestpuesta/helpers/calcMuro.dart';
-import 'package:prestpuesta/helpers/calculoPiso.dart';
+import 'package:prestpuesta/helpers/helpers.dart';
 import 'package:prestpuesta/widgets/widget.dart';
 part 'calculo_event.dart';
 part 'calculo_state.dart';
@@ -20,6 +19,8 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
       } else if (event is OnMensaje) {
         emit(state.copyWith(msg: event.msg));
       } else if (event is OnCalculoMuro) {
+        emit(state.copyWith(respuesta: event.respuesta));
+      } else if (event is OnCalculoZapata) {
         emit(state.copyWith(respuesta: event.respuesta));
       }
       // TODO: implement event handler
@@ -49,6 +50,19 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
               ],
             )));
         break;
+      case 2:
+        add(OnCambio(
+            i: i,
+            materilaes: Row(
+              children: [
+                WlstaDesp(materiales.getBloques(), "grava", 2),
+                WlstaDesp(materiales.getCemento(), "cemento", 2),
+                WlstaDesp(materiales.getArenas(), "arena", 2),
+                WlstaDesp(materiales.getVarillas(), "acero-long", 2),
+                WlstaDesp(materiales.getVarillas(), "acero-anch", 2),
+              ],
+            )));
+        break;
       default:
     }
   }
@@ -57,14 +71,7 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
     switch (state.i) {
       case 0:
         if (isValidForm() && valores.muroValid()) {
-          add(OnCalculoMuro(
-              alto: valores.valores["Altura"],
-              ancho: valores.valores["Ancho"],
-              largo: valores.valores["Largo"],
-              ly: valores.valores["ly"],
-              bloque: valores.valores["bloque"],
-              arena: valores.valores["arena"],
-              cemento: valores.valores["cemento"]));
+          add(OnCalculoMuro(datos: valores.getValor(0)));
           add(OnMensaje(""));
           resetValor();
           return;
@@ -77,17 +84,27 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
           add(OnMensaje("Llene todos los campos"));
           return;
         }
-        add(OnCalculoPiso(
-            largo: valores.valores["Largo"],
-            ancho: valores.valores["Ancho"],
-            alto: valores.valores["Alto"],
-            cemento: valores.valores["cemento"],
-            arena: valores.valores["arena"],
-            grava: valores.valores["grava"],
-            resistencia: valores.valores["Resistencia"]));
+        add(OnCalculoPiso(datos: valores.getValor(1)));
         add(OnMensaje(""));
         resetValor();
-
+        break;
+      case 2:
+        if (!valores.zapataValid()) {
+          add(OnMensaje("Llene todos los campos"));
+          return;
+        }
+        add(OnCalculoZapata(valores.getValor(2)));
+        add(OnMensaje(""));
+        resetValor();
+        break;
+      case 3:
+        if (!valores.zapataValid()) {
+          add(OnMensaje("Llene todos los campos"));
+          return;
+        }
+        add(OnCalculoTrabe(valores.getValor(3)));
+        add(OnMensaje(""));
+        resetValor();
         break;
       default:
     }
