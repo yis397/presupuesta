@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 part of './helpers.dart';
 
 List<Map<String, dynamic>> calculoTrabe(
@@ -19,7 +21,6 @@ List<Map<String, dynamic>> calculoTrabe(
     Map arena,
     Map grava,
     String resistencia) {
-  final area = (altura / 100) * (ancho / 100);
   Concreto concreto;
   List<Map<String, dynamic>> data = [];
   AceroAbilitado acero;
@@ -72,11 +73,15 @@ List<Map<String, dynamic>> calculoTrabe(
       "color": 0xffa95b4f
     },
     {
-      "titulo": "Peso Total:",
+      "titulo": "Peso longi:",
       "data": acero.textAcerLong(),
       "color": 0xfffffc089
     },
-    {"titulo": "Peso Total:", "data": acero.textEstribo(), "color": 0xffe98668},
+    {
+      "titulo": "Peso estribos:",
+      "data": acero.textEstribo(),
+      "color": 0xffe98668
+    },
     {
       "titulo": "Precio Acero:",
       "data": acero.textPrecio(),

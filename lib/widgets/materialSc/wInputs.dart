@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 part of "../widget.dart";
 
 class WForm extends StatelessWidget {
@@ -14,18 +16,19 @@ class WForm extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 150,
-                    child: ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: bloques[state.i!].length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return bloques[state.i!][index];
-                        }),
-                  ),
+                      height: 150,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                        ),
+                        child: bloques[state.i!][0],
+                      )),
                   MaterialButton(
                       onPressed: () {
-                        if (!context.read<MaterialesBloc>().isValidForm())
+                        if (!context.read<MaterialesBloc>().isValidForm()) {
                           return;
+                        }
+
                         context.read<MaterialesBloc>().setValores();
                       },
                       child: Container(
@@ -39,9 +42,9 @@ class WForm extends StatelessWidget {
                       )),
                   MaterialButton(
                     onPressed: () {
-                      print("hola");
+                      context.read<MaterialesBloc>().delet();
                     },
-                    child: Text("CLICK"),
+                    child: const Text("CLICK"),
                   )
                 ],
               )),

@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 part of "helpers.dart";
 
 List<Map<String, dynamic>> calculoZapataI(
@@ -46,11 +47,11 @@ List<Map<String, dynamic>> calculoZapataI(
   concreto = concreto = Concreto(
       mqConcreto: mqBase,
       cemUnidad: cemento["unidad"],
-      precioCemen: double.parse(cemento["precio"]),
+      precioCemen: cemento["precio"],
       arenaUnidad: arena["unidad"],
-      precioArena: double.parse(arena["precio"]),
+      precioArena: arena["precio"],
       gravaUnidad: grava["unidad"],
-      precioGrava: double.parse(grava["precio"]),
+      precioGrava: grava["precio"],
       resistencia: resistencia);
   data = [
     {

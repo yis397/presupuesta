@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -5,7 +7,7 @@ class DbHive {
   String path = "";
   final hive = Hive;
   late Box box;
-  Db() {
+  db() {
     init();
   }
 
@@ -21,17 +23,10 @@ class DbHive {
     final directori = await getApplicationSupportDirectory();
     hive.init(directori.path);
     box = await hive.openBox('materiales');
-    print('${box.isOpen} inicializado');
   }
 
   setMaterial(List<dynamic> materiales, String nom) async {
     await box.put(nom, materiales);
-    print("agregado");
-  }
-
-  getBloques() async {
-    final bloques = await box.get("bloques");
-    print(bloques);
   }
 
   Future<List<dynamic>> getMateriales(int i) async {
@@ -55,6 +50,10 @@ class DbHive {
 
   delet() async {
     await box.delete("bloques");
-    print("eliminado");
+    await box.delete("cementos");
+    await box.delete("arenas");
+    await box.delete("gravas");
+    await box.delete("varillas");
+    await box.delete("piedras");
   }
 }

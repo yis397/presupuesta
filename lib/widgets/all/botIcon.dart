@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 part of "../widget.dart";
 
 class BotIcon extends StatelessWidget {
@@ -18,7 +19,7 @@ class BotIcon extends StatelessWidget {
             child: Icon(
               icono,
               size: tama,
-              color: Color(0xff682736),
+              color: const Color(0xff682736),
             )),
         Titulo(titulo, 15, 2, 0xff682736)
       ],

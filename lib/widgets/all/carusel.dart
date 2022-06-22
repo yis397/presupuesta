@@ -17,15 +17,16 @@ class Carrusel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final matBloc = BlocProvider.of<MaterialesBloc>(context);
+    final calBloc = BlocProvider.of<CalculoBloc>(context);
     return CarouselSlider(
       options: CarouselOptions(
           viewportFraction: frx,
           height: 200,
           onPageChanged: (i, ch) => {
                 if (tipo == 1)
-                  {matBloc.add(onSeleccionIndx(i))}
+                  {matBloc.add(OnSeleccionIndx(i))}
                 else
-                  {print("hola")}
+                  {calBloc.selectCalculo(i)}
               }),
       items: lista.map((i) {
         return Builder(builder: (BuildContext context) {
@@ -34,8 +35,9 @@ class Carrusel extends StatelessWidget {
                   nom: i["nom"],
                 )
               : ItemHome(
-                  i: i["index"],
-                  titulo: i["nom"],
+                  i: i["id"],
+                  titulo: i["nombre"],
+                  img: i['img'],
                 ));
         });
       }).toList(),
@@ -68,7 +70,7 @@ class ItemMaterial extends StatelessWidget {
             decoration: BoxDecoration(
                 color: (nom == list[state.i!]["nom"]
                     ? Color(colores["terciario"]!)
-                    : Color.fromARGB(255, 108, 122, 145)),
+                    : const Color.fromARGB(255, 108, 122, 145)),
                 borderRadius: BorderRadius.circular(20)),
             child: Text(nom));
       },
@@ -77,32 +79,49 @@ class ItemMaterial extends StatelessWidget {
 }
 
 class ItemHome extends StatelessWidget {
-  const ItemHome({required this.titulo, required this.i, Key? key})
+  const ItemHome(
+      {required this.titulo, required this.img, required this.i, Key? key})
       : super(key: key);
   final String titulo;
   final int i;
+  final String img;
 
   @override
   Widget build(BuildContext context) {
     final matBloc = BlocProvider.of<CalculoBloc>(context);
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.height * .3,
-      width: size.width * .7,
-      child: MaterialButton(
-          onPressed: () {
-            matBloc.selectCalculo(0);
-            Navigator.pushNamed(context, "calculo");
-          },
-          child: Container(
-            height: size.height * .25,
-            width: 300,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              color: Colors.amber,
-            ),
-            child: Text(titulo),
-          )),
-    );
+        height: size.height * .3,
+        width: size.width * .7,
+        child: MaterialButton(
+            onPressed: () {
+              matBloc.selectCalculo(i);
+              Navigator.pushNamed(context, "calculo");
+            },
+            child: Stack(children: [
+              Container(
+                  height: size.height * .25,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.amber,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: FadeInImage(
+                      placeholder: AssetImage(img),
+                      image: AssetImage(img),
+                      fit: BoxFit.cover,
+                    ),
+                  )),
+              Container(
+                margin: const EdgeInsets.only(top: 180),
+                width: size.width * .6,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(colores["terciario"]!)),
+                child: Titulo(titulo, 14, 3, colores["secundario"]!),
+              )
+            ])));
   }
 }

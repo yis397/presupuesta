@@ -10,26 +10,26 @@ class HomeLayout extends StatelessWidget {
     return Column(
       children: [
         HeaderHom(size: size),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
-        Carrusel(
-            size: size,
-            lista: [
-              {"nom": "columna", "index": 0}
-            ],
-            frx: .7,
-            tipo: 2),
-        SizedBox(
+        Carrusel(size: size, lista: obraNegra, frx: .7, tipo: 2),
+        const SizedBox(
           height: 20,
         ),
-        Container(
+        SizedBox(
           height: size.height * .1,
-          child: BotIcon("Add Material", Icons.add_circle, 45,
-              () => Navigator.pushNamed(context, "material")),
+          child: BotIcon(
+              "Add Material", Icons.add_circle, 45, () => navegacion(context)),
         )
       ],
     );
+  }
+
+  navegacion(BuildContext context) {
+    final matBloc = BlocProvider.of<MaterialesBloc>(context);
+    matBloc.add(OnSeleccionIndx(0));
+    Navigator.pushNamed(context, "material");
   }
 }
 

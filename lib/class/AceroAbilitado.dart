@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class AceroAbilitado {
   String aceroLong = "";
   String aceroEstri = "";
@@ -57,15 +59,15 @@ class AceroAbilitado {
   }
 
   String textAcerLong() {
-    return "${(totPesoaceroLong).toStringAsFixed(1)}/$aceroLong";
+    return "${(totPesoaceroLong).toStringAsFixed(1)}/kg";
   }
 
   String textEstribo() {
-    return "${(totPesoaceroEstri).toStringAsFixed(1)}/$aceroEstri";
+    return "${(totPesoaceroEstri).toStringAsFixed(1)}/kg";
   }
 
   String textPrecio() {
-    return "${(totAceroPrec).toStringAsFixed(1)}/num";
+    return "\$${(totAceroPrec).toStringAsFixed(1)}";
   }
 }
 
@@ -104,10 +106,12 @@ class AceroZapa {
   aceroAbi() {
     longUnAncho = ((rec / 100) * 2) - ancho + ((ganchoLong / 100) * 2);
     longUnLong = ((rec / 100) * 2) - largo + ((ganchoLong / 100) * 2);
-    totlong =
-        ((((rec / 100) * 2) - largo) / separacion) * longUnLong * pesoLargo;
-    totAnch =
-        ((((rec / 100) * 2) - ancho) / separacion) * longUnAncho * pesoAncho;
+    totlong = ((((rec / 100) * 2) - largo) / (separacion / 100)) *
+        longUnLong *
+        pesoLargo;
+    totAnch = ((((rec / 100) * 2) - ancho) / (separacion / 100)) *
+        longUnAncho *
+        pesoAncho;
 
     totprecioAncho = totAnch * precioAncho;
     totprecioLargo = totlong * precioLargo;

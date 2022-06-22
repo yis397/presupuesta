@@ -13,7 +13,7 @@ void main() {
         create: (context) => CalculoBloc(),
       ),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 

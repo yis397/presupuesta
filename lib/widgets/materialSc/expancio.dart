@@ -1,15 +1,13 @@
 part of "../widget.dart";
 
 class FormAdd extends StatefulWidget {
-  FormAdd({Key? key}) : super(key: key);
+  const FormAdd({Key? key}) : super(key: key);
 
   @override
   State<FormAdd> createState() => _FormAddState();
 }
 
 class _FormAddState extends State<FormAdd> {
-  final List<Item> _dat = [Item(expandedValue: "a", headerValue: "1")];
-
   @override
   Widget build(BuildContext context) {
     return ExpansionPanelList(
@@ -19,7 +17,7 @@ class _FormAddState extends State<FormAdd> {
           _items[index]['isExpanded'] = !isExpanded;
         });
       },
-      animationDuration: Duration(milliseconds: 600),
+      animationDuration: const Duration(milliseconds: 600),
       children: _items
           .map(
             (item) => ExpansionPanel(
@@ -27,11 +25,12 @@ class _FormAddState extends State<FormAdd> {
               backgroundColor:
                   item['isExpanded'] == true ? Colors.cyan[100] : Colors.white,
               headerBuilder: (_, isExpanded) => Container(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 50,
                       ),
                       Icon(
@@ -41,7 +40,7 @@ class _FormAddState extends State<FormAdd> {
                       )
                     ],
                   )),
-              body: WForm(),
+              body: const WForm(),
               isExpanded: item['isExpanded'],
             ),
           )

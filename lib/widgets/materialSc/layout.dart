@@ -20,8 +20,8 @@ class LayoutMat extends StatelessWidget {
 
         return Column(
           children: [
-            HeadC(size, "titulo"),
-            Container(
+            HeadC(size, "titulo", 1, 'assets/img/muro.jpg'),
+            SizedBox(
               height: size.height * .07,
               child: Carrusel(
                 size: size,
@@ -33,9 +33,7 @@ class LayoutMat extends StatelessWidget {
             SizedBox(
               height: size.height * .1,
             ),
-            Container(
-              child: FormAdd(),
-            ),
+            const FormAdd(),
             ListView.builder(
               shrinkWrap: true,
               itemCount: lista.length,
@@ -43,20 +41,24 @@ class LayoutMat extends StatelessWidget {
                 return lista.isEmpty
                     ? Titulo("Sin MATERIALES", 20, 2, 0xff682736)
                     : ListTile(
-                        leading: Icon(Icons.my_location_rounded),
+                        leading: const Icon(Icons.my_location_rounded),
                         title: Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: size.width * 0.5,
                               child: Titulo(
                                   lista[index]["nombre"], 15, 1, 0xffC7594A),
                             ),
                             index != 0
                                 ? IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () {},
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () {
+                                      context
+                                          .read<MaterialesBloc>()
+                                          .deletMaterial(lista[index]["id"]);
+                                    },
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.circle_outlined,
                                     color: Colors.white,
                                   )

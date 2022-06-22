@@ -6,3 +6,4 @@ part "calculoPiso.dart";
 part "addMateri.dart";
 part "calcMuro.dart";
 part "calculoTrabe.dart";
+part "categoria.dart";

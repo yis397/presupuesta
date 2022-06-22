@@ -11,55 +11,80 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
   final Materiales materiales = Materiales();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final ValoresCalculo valores = ValoresCalculo();
-  CalculoBloc() : super(CalculoState(i: 0)) {
+  CalculoBloc() : super(CalculoState(i: 0, nombre: {})) {
     materiales.initDb();
     on<CalculoEvent>((event, emit) {
       if (event is OnCambio) {
-        emit(state.copyWith(i: event.i, materiales: event.materilaes));
+        emit(state.copyWith(
+            i: event.i, materiales: event.materilaes, nombre: event.nombre));
       } else if (event is OnMensaje) {
         emit(state.copyWith(msg: event.msg));
       } else if (event is OnCalculoMuro) {
         emit(state.copyWith(respuesta: event.respuesta));
+      } else if (event is OnCalculoPiso) {
+        emit(state.copyWith(respuesta: event.respuesta));
       } else if (event is OnCalculoZapata) {
         emit(state.copyWith(respuesta: event.respuesta));
+      } else if (event is OnCalculoTrabe) {
+        emit(state.copyWith(respuesta: event.respuesta));
+      } else if (event is OnReset) {
+        emit(state.copyWith(respuesta: []));
       }
-      // TODO: implement event handler
     });
   }
   selectCalculo(int i) {
+    Map datos = obraNegra[i];
     switch (i) {
       case 0:
         add(OnCambio(
             i: i,
-            materilaes: Row(
+            nombre: datos,
+            materilaes: Wrap(
+              alignment: WrapAlignment.spaceAround,
               children: [
-                WlstaDesp(materiales.getBloques(), "bloque", 2),
-                WlstaDesp(materiales.getCemento(), "cemento", 2),
-                WlstaDesp(materiales.getArenas(), "arena", 2)
+                WlstaDesp(materiales.getBloques(), "bloque"),
+                WlstaDesp(materiales.getCemento(), "cemento"),
+                WlstaDesp(materiales.getArenas(), "arena")
               ],
             )));
         break;
       case 1:
         add(OnCambio(
             i: i,
+            nombre: datos,
             materilaes: Row(
               children: [
-                WlstaDesp(materiales.getBloques(), "grava", 2),
-                WlstaDesp(materiales.getCemento(), "cemento", 2),
-                WlstaDesp(materiales.getArenas(), "arena", 2)
+                WlstaDesp(materiales.getGravas(), "grava"),
+                WlstaDesp(materiales.getCemento(), "cemento"),
+                WlstaDesp(materiales.getArenas(), "arena")
               ],
             )));
         break;
       case 2:
+      case 3:
+      case 4:
         add(OnCambio(
             i: i,
-            materilaes: Row(
+            nombre: datos,
+            materilaes: Column(
               children: [
-                WlstaDesp(materiales.getBloques(), "grava", 2),
-                WlstaDesp(materiales.getCemento(), "cemento", 2),
-                WlstaDesp(materiales.getArenas(), "arena", 2),
-                WlstaDesp(materiales.getVarillas(), "acero-long", 2),
-                WlstaDesp(materiales.getVarillas(), "acero-anch", 2),
+                Wrap(
+                  alignment: WrapAlignment.spaceAround,
+                  children: [
+                    WlstaDesp(materiales.getGravas(), "grava"),
+                    WlstaDesp(materiales.getCemento(), "cemento"),
+                    WlstaDesp(materiales.getArenas(), "arena"),
+                  ],
+                ),
+                Wrap(
+                  alignment: WrapAlignment.spaceAround,
+                  children: [
+                    WlstaDesp(materiales.getVarillas(), "aceroLong"),
+                    i == 4
+                        ? WlstaDesp(materiales.getVarillas(), "estribo")
+                        : WlstaDesp(materiales.getVarillas(), "acero-anch"),
+                  ],
+                ),
               ],
             )));
         break;
@@ -67,7 +92,7 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
     }
   }
 
-  calular() {
+  calcular() {
     switch (state.i) {
       case 0:
         if (isValidForm() && valores.muroValid()) {
@@ -89,21 +114,26 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
         resetValor();
         break;
       case 2:
-        if (!valores.zapataValid()) {
+      case 3:
+        if (valores.zapataValid()) {
           add(OnMensaje("Llene todos los campos"));
           return;
         }
-        add(OnCalculoZapata(valores.getValor(2)));
+        state.i == 2
+            ? add(OnCalculoZapata(valores.getValor(2)))
+            : add(OnCalculoZapata(valores.getValor(3)));
         add(OnMensaje(""));
         resetValor();
         break;
-      case 3:
-        if (!valores.zapataValid()) {
+      case 4:
+        if (!valores.trabeValid()) {
           add(OnMensaje("Llene todos los campos"));
-          return;
+          break;
         }
-        add(OnCalculoTrabe(valores.getValor(3)));
+        add(OnCalculoTrabe(valores.getValor(4)));
+
         add(OnMensaje(""));
+        valores.resetValor();
         resetValor();
         break;
       default:
@@ -114,7 +144,7 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
     return formKey.currentState?.validate() ?? false;
   }
 
-  setValor(String nom, String value) {
+  setValor(String nom, dynamic value) {
     valores.setValor(nom, value);
   }
 

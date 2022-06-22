@@ -1,21 +1,26 @@
+// ignore_for_file: file_names, camel_case_types
 part of "../widget.dart";
 
 class HeadC extends StatelessWidget {
   final Size size;
+  final int tipo;
   final String text1;
+  final String img;
 
-  const HeadC(this.size, this.text1, {Key? key}) : super(key: key);
+  const HeadC(this.size, this.text1, this.tipo, this.img, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final calBloc = BlocProvider.of<CalculoBloc>(context);
+    return SizedBox(
       width: size.width,
       height: size.height * .27,
       child: Stack(children: [
         Column(
           children: [
-            intStack(size),
-            Container(
+            intStack(size, img),
+            SizedBox(
               height: size.height * .13,
               child: const Padding(
                 padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
@@ -29,12 +34,15 @@ class HeadC extends StatelessWidget {
           children: [
             Divider(
               height: size.height * .11,
-              color: Color.fromARGB(0, 255, 255, 255),
+              color: const Color.fromARGB(0, 255, 255, 255),
             ),
             Row(
               children: [
                 MaterialButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => {
+                    if (tipo != 1) {calBloc.add(OnReset())},
+                    Navigator.pop(context)
+                  },
                   child: const Icon(
                     Icons.arrow_back_ios,
                     size: 40,
@@ -63,20 +71,19 @@ class HeadC extends StatelessWidget {
 
 class intStack extends StatelessWidget {
   final Size size;
-  const intStack(this.size, {Key? key}) : super(key: key);
+  final String img;
+  const intStack(this.size, this.img, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    int imag = 0;
-    List<Map<String, dynamic>> list = [];
     return Container(
       height: size.height * .14,
       decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/img/muro.jpg"),
+            image: AssetImage(img),
             fit: BoxFit.cover,
           ),
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(90),
               bottomRight: Radius.circular(90))),
     );

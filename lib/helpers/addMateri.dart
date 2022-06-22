@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 part of './helpers.dart';
 
 Map<String, dynamic> selectMaterial(int i, Map valor) {
@@ -7,11 +9,11 @@ Map<String, dynamic> selectMaterial(int i, Map valor) {
     //bolques
     case 0:
       material = {
-        'nombre': valor['nombre'],
-        'precio': valor['precio'],
-        'Ancho': valor['Ancho'],
-        'Altura': valor['Altura'],
-        'Largo': valor['Largo'],
+        'nombre': '${valor['nombre']}/${valor['unidad']}',
+        'precio': double.parse(valor['precio']),
+        'Ancho': double.parse(valor['Ancho']),
+        'Altura': double.parse(valor['Altura']),
+        'Largo': double.parse(valor['Largo']),
         'id': date.microsecondsSinceEpoch,
         'unidad': valor['unidad']
       };
@@ -19,42 +21,42 @@ Map<String, dynamic> selectMaterial(int i, Map valor) {
       break;
     case 1:
       material = {
-        'nombre': valor['nombre'],
-        'precio': valor['precio'],
+        'nombre': '${valor['nombre']}/${valor['unidad']}',
+        'precio': double.parse(valor['precio']),
         'id': date.microsecondsSinceEpoch,
         'unidad': valor['unidad']
       };
       break;
     case 2:
       material = {
-        'nombre': valor['nombre'],
-        'precio': valor['precio'],
+        'nombre': '${valor['nombre']}/${valor['unidad']}',
+        'precio': double.parse(valor['precio']),
         'id': date.microsecondsSinceEpoch,
         'unidad': valor['unidad']
       };
       break;
     case 3:
       material = {
-        'nombre': valor['nombre'],
-        'precio': valor['precio'],
+        'nombre': '${valor['nombre']}/${valor['unidad']}',
+        'precio': double.parse(valor['precio']),
         'id': date.microsecondsSinceEpoch,
         'unidad': valor['unidad']
       };
       break;
     case 4:
       material = {
-        'nombre': valor['nombre'],
-        'precio': valor['precio'],
+        'nombre': '${valor['nombre']}/${valor['pulgada']}',
+        'precio': double.parse(valor['precio']),
         'id': date.microsecondsSinceEpoch,
         'unidad': valor['unidad'],
         'pulgada': valor['pulgada'],
-        'peso': valor['peso'],
+        'peso': double.parse(valor['peso']),
       };
       break;
     case 5:
       material = {
-        'nombre': valor['nombre'],
-        'precio': valor['precio'],
+        'nombre': '${valor['nombre']}/${valor['unidad']}',
+        'precio': double.parse(valor['precio']),
         'id': date.microsecondsSinceEpoch,
         'unidad': valor['unidad']
       };

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'calculo_bloc.dart';
 
 @immutable
@@ -5,8 +7,9 @@ abstract class CalculoEvent {}
 
 class OnCambio extends CalculoEvent {
   final int i;
+  final Map nombre;
   final Widget materilaes;
-  OnCambio({required this.i, required this.materilaes});
+  OnCambio({required this.i, required this.materilaes, required this.nombre});
 }
 
 class OnMensaje extends CalculoEvent {
@@ -14,16 +17,22 @@ class OnMensaje extends CalculoEvent {
   OnMensaje(this.msg);
 }
 
+class OnReset extends CalculoEvent {
+  OnReset();
+}
+
 class OnCalculoMuro extends CalculoEvent {
   final Map datos;
   List<Map<String, dynamic>> respuesta = [];
-  OnCalculoMuro({required this.datos});
+  OnCalculoMuro({required this.datos}) {
+    calculo();
+  }
   calculo() {
     respuesta = calculoMuro(
-        datos['largo'],
-        datos['alto'],
+        datos['bloque']['Largo'],
+        datos['bloque']['Altura'],
         datos['ly'],
-        datos['ancho'],
+        datos['bloque']['Ancho'],
         datos['area'],
         datos['bloque']['unidad'],
         datos['bloque']['precio'],
@@ -38,7 +47,9 @@ class OnCalculoPiso extends CalculoEvent {
   final Map datos;
   List<Map<String, dynamic>> respuesta = [];
 
-  OnCalculoPiso({required this.datos});
+  OnCalculoPiso({required this.datos}) {
+    calculo();
+  }
 
   calculo() {
     respuesta = calculoPiso(datos['area'], datos['alto'], datos['resistencia'],
@@ -49,7 +60,9 @@ class OnCalculoPiso extends CalculoEvent {
 class OnCalculoZapata extends CalculoEvent {
   final Map datos;
   List<Map<String, dynamic>> respuesta = [];
-  OnCalculoZapata(this.datos);
+  OnCalculoZapata(this.datos) {
+    calculo();
+  }
 
   calculo() {
     respuesta = calculoZapataI(
@@ -59,10 +72,10 @@ class OnCalculoZapata extends CalculoEvent {
         datos['gancho'],
         datos['rec'],
         datos['separacion'],
-        double.parse(datos['aceroAnch']['peso']),
-        double.parse(datos['aceroLong']['peso']),
-        double.parse(datos['aceroAnch']['precio']),
-        double.parse(datos['aceroLong']['precio']),
+        datos['aceroAnch']['peso'],
+        datos['aceroLong']['peso'],
+        datos['aceroAnch']['precio'],
+        datos['aceroLong']['precio'],
         datos['cemento'],
         datos['arena'],
         datos['grava'],
@@ -79,14 +92,16 @@ class OnCalculoTrabe extends CalculoEvent {
   List<Map<String, dynamic>> respuesta = [];
   final Map datos;
 
-  OnCalculoTrabe(this.datos);
+  OnCalculoTrabe(this.datos) {
+    calculo();
+  }
 
   calculo() {
     respuesta = calculoTrabe(
-        datos['aceroLong'],
-        datos['estribo'],
-        double.parse(datos['aceroLong']['peso']),
-        double.parse(datos['estribo']['peso']),
+        datos['aceroLong']['nombre'],
+        datos['estribo']['nombre'],
+        datos['aceroLong']['peso'],
+        datos['estribo']['peso'],
         datos['rec'],
         datos['ancho'],
         datos['altura'],
@@ -94,8 +109,8 @@ class OnCalculoTrabe extends CalculoEvent {
         datos['separacion'],
         datos['ganchoEst'],
         datos['ganchoLng'],
-        double.parse(datos['estribo']['precio']),
-        double.parse(datos['aceroLong']['precio']),
+        datos['estribo']['precio'],
+        datos['aceroLong']['precio'],
         datos['numVar'],
         datos['cemento'],
         datos['arena'],

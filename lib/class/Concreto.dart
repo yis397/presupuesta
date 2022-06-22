@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class Concreto {
   double mqConcreto = 0;
   double presConcreto = 0;
@@ -18,7 +20,8 @@ class Concreto {
   String arenaUnidad = "";
   String gravaUnidad = "";
   double totalPrecio = 0;
-/**0 cemento,1 grava, 2 arena, 3 agua */
+
+  /// 0 cemento,1 grava, 2 arena, 3 agua */
 
   Concreto(
       {required this.mqConcreto,
@@ -35,7 +38,6 @@ class Concreto {
     totalPrecio = totprecioArena + totprecioCemen + totprecioGrava;
   }
   getConcre150(double mq) {
-    print("150");
     cantidadCemen = 279 * mq;
     cantidadGrava = 0.559 * mq;
     cantidadArena = 0.388 * mq;
@@ -43,7 +45,6 @@ class Concreto {
   }
 
   getConcre200(double mq) {
-    print("200");
     cantidadCemen = 317 * mq;
     cantidadGrava = 0.733 * mq;
     cantidadArena = 0.388 * mq;
@@ -51,7 +52,6 @@ class Concreto {
   }
 
   getConcre100(double mq) {
-    print("100");
     cantidadCemen = 246 * mq;
     cantidadGrava = 0.733 * mq;
     cantidadArena = 0.578 * mq;
@@ -59,7 +59,6 @@ class Concreto {
   }
 
   getConcre250(double mq) {
-    print("250");
     cantidadCemen = 374 * mq;
     cantidadGrava = 0.733 * mq;
     cantidadArena = 0.505 * mq;
@@ -115,6 +114,6 @@ class Concreto {
   }
 
   textTotal() {
-    return "${(totalPrecio).toStringAsFixed(1)}/mn";
+    return "\$${(totalPrecio).toStringAsFixed(1)}";
   }
 }

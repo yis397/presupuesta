@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 part of "../widget.dart";
 
 class TextInputs extends StatelessWidget {
@@ -22,14 +23,16 @@ class TextInputs extends StatelessWidget {
     final matBloc = BlocProvider.of<MaterialesBloc>(context);
     final calcBloc = BlocProvider.of<CalculoBloc>(context);
     return Container(
-      margin: EdgeInsets.only(right: 20),
+      margin: const EdgeInsets.only(right: 20),
       width: anch,
       child: TextFormField(
           autocorrect: false,
           keyboardType: tipo,
+          maxLength: 8,
+          enableSuggestions: false,
           decoration: InputDecorations.authInputDecoration(
-            hintText: "$nombre/$unidad",
-            labelText: nombre,
+            hintText: nombre,
+            labelText: "$nombre/$unidad",
           ),
           onChanged: (val) => (bloc == 1
               ? matBloc.setValor(nombre, val)
@@ -39,6 +42,7 @@ class TextInputs extends StatelessWidget {
             } else {
               return 'Requerido';
             }
+            return null;
           }),
     );
   }
@@ -50,14 +54,15 @@ class InputDecorations {
       required String labelText,
       IconData? prefixIcon}) {
     return InputDecoration(
-        enabledBorder: UnderlineInputBorder(
+        enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.deepPurple),
         ),
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.deepPurple, width: 2)),
         hintText: hintText,
+        counterText: "",
         labelText: labelText,
-        labelStyle: TextStyle(color: Colors.grey),
+        labelStyle: const TextStyle(color: Colors.grey),
         prefixIcon: prefixIcon != null
             ? Icon(prefixIcon, color: Colors.deepPurple)
             : null);

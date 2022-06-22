@@ -9,6 +9,13 @@ class WResulatdo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (datos.isEmpty) {
+      return const Center(
+        child: SizedBox(
+          child: Text("As un calculo"),
+        ),
+      );
+    }
     return ListView.builder(
         itemCount: datos.length,
         itemBuilder: (BuildContext context, int index) {
@@ -16,7 +23,7 @@ class WResulatdo extends StatelessWidget {
             children: [
               WCitemResult(datos[index]["color"], datos[index]["titulo"],
                   datos[index]["data"].toString()),
-              Divider(
+              const Divider(
                 height: 15,
               )
             ],
@@ -39,13 +46,13 @@ class WCitemResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeInDown(
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
       child: Container(
         height: 50,
         decoration: BoxDecoration(
             color: Color(color), borderRadius: BorderRadius.circular(10)),
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
           title: Titulo(tiulo, 20, 2, 0xfff0f0ec),
           trailing: Titulo(dato, 15, 2, 0xfff0f0ec),
         ),

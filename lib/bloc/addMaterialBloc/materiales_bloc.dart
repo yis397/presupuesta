@@ -24,10 +24,12 @@ class MaterialesBloc extends Bloc<MaterialesEvent, MaterialesState> {
           i: 0,
         )) {
     on<MaterialesEvent>((event, emit) {
-      if (event is onSeleccionIndx) {
+      if (event is OnSeleccionIndx) {
         emit(state.copyWith(
             i: event.i, materiales: materiales.getMateriales(event.i)));
       } else if (event is OnAddMaterila) {
+        emit(state.copyWith(materiales: event.materiales));
+      } else if (event is OnDeletMaterial) {
         emit(state.copyWith(materiales: event.materiales));
       }
     });
@@ -38,9 +40,15 @@ class MaterialesBloc extends Bloc<MaterialesEvent, MaterialesState> {
     materiales.setMateriales(state.i!, [material]);
     add(OnAddMaterila(materiales.getMateriales(state.i!)));
     resetValor();
+    formKey.currentState?.reset();
   }
 
   bool isValidForm() {
+    if (state.i == 4) {
+      if (valores['unidad'] == '' && valores['pulgada'] == '') {
+        return false;
+      }
+    }
     if (valores['unidad'] == '') {
       return false;
     }
@@ -51,14 +59,22 @@ class MaterialesBloc extends Bloc<MaterialesEvent, MaterialesState> {
     if (nom == "pulgada") {
       switch (value) {
         case '1/4':
-          valores['peso'] = '.991';
+          valores['peso'] = '0.250';
           break;
-        case '1/8':
-          valores['peso'] = '.991';
+        case '3/8':
+          valores['peso'] = '0.557';
+          break;
+        case '1/2':
+          valores['peso'] = '0.996';
+          break;
+        case '5/8':
+          valores['peso'] = '1.560';
+          break;
+        case '3/4':
+          valores['peso'] = '2.250';
           break;
         default:
       }
-      return;
     }
     valores[nom] = value;
   }
@@ -75,5 +91,14 @@ class MaterialesBloc extends Bloc<MaterialesEvent, MaterialesState> {
       'peso': '',
       'pulgada': ''
     };
+  }
+
+  void deletMaterial(int id) {
+    materiales.deletMaterial(state.i!, id);
+    add(OnDeletMaterial(materiales.getMateriales(state.i!)));
+  }
+
+  delet() {
+    materiales.db.delet();
   }
 }
