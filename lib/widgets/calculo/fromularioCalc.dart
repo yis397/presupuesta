@@ -53,11 +53,11 @@ List<List> formuCalculo = [
             bloc: 2,
           ),
           TextInputs(
-            anch: 90,
+            anch: 86,
             nombre: "Altura",
             val: 1,
             tipo: TextInputType.number,
-            unidad: "m",
+            unidad: "cm",
             bloc: 2,
           ),
         ]),
@@ -77,7 +77,7 @@ List<List> formuCalculo = [
       children: [
         Row(children: [
           const TextInputs(
-            anch: 65,
+            anch: 63,
             nombre: "Largo",
             val: 1,
             tipo: TextInputType.number,
@@ -85,7 +85,7 @@ List<List> formuCalculo = [
             bloc: 2,
           ),
           const TextInputs(
-            anch: 70,
+            anch: 68,
             nombre: "Ancho",
             val: 1,
             tipo: TextInputType.number,
@@ -93,7 +93,7 @@ List<List> formuCalculo = [
             bloc: 2,
           ),
           const TextInputs(
-            anch: 65,
+            anch: 63,
             nombre: "Altura",
             val: 1,
             tipo: TextInputType.number,
@@ -142,7 +142,7 @@ List<List> formuCalculo = [
       children: [
         Row(children: [
           const TextInputs(
-            anch: 65,
+            anch: 63,
             nombre: "Largo",
             val: 1,
             tipo: TextInputType.number,
@@ -150,7 +150,7 @@ List<List> formuCalculo = [
             bloc: 2,
           ),
           const TextInputs(
-            anch: 70,
+            anch: 68,
             nombre: "Ancho",
             val: 1,
             tipo: TextInputType.number,
@@ -158,7 +158,7 @@ List<List> formuCalculo = [
             bloc: 2,
           ),
           const TextInputs(
-            anch: 65,
+            anch: 63,
             nombre: "Altura",
             val: 1,
             tipo: TextInputType.number,
@@ -232,7 +232,7 @@ List<List> formuCalculo = [
       children: [
         Row(children: [
           const TextInputs(
-            anch: 65,
+            anch: 63,
             nombre: "Largo",
             val: 1,
             tipo: TextInputType.number,
@@ -240,7 +240,7 @@ List<List> formuCalculo = [
             bloc: 2,
           ),
           const TextInputs(
-            anch: 70,
+            anch: 68,
             nombre: "Ancho",
             val: 1,
             tipo: TextInputType.number,
@@ -248,7 +248,7 @@ List<List> formuCalculo = [
             bloc: 2,
           ),
           const TextInputs(
-            anch: 65,
+            anch: 63,
             nombre: "Altura",
             val: 1,
             tipo: TextInputType.number,
@@ -298,7 +298,7 @@ List<List> formuCalculo = [
             nombre: "a1",
             val: 1,
             tipo: TextInputType.number,
-            unidad: "cm",
+            unidad: "un",
             bloc: 2,
           )
         ]),

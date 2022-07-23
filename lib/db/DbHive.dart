@@ -11,18 +11,21 @@ class DbHive {
     init();
   }
 
-  DbHive() {
-    init();
-  }
-  init() async {
+  Future<bool> init() async {
     await Hive.initFlutter();
-    await inicializarBox();
+    return await inicializarBox();
   }
 
-  inicializarBox() async {
+  Future<bool> inicializarBox() async {
     final directori = await getApplicationSupportDirectory();
     hive.init(directori.path);
     box = await hive.openBox('materiales');
+    if (!box.containsKey(1)) {
+      print(box);
+      return true;
+    } else {
+      return false;
+    }
   }
 
   setMaterial(List<dynamic> materiales, String nom) async {
@@ -55,5 +58,13 @@ class DbHive {
     await box.delete("gravas");
     await box.delete("varillas");
     await box.delete("piedras");
+  }
+
+  setRecordatorio(List<Map<String, dynamic>> list) async {
+    await box.put('recordatorio', list);
+  }
+
+  Future<List<dynamic>> getRecordatorio() async {
+    return await box.get("recordatorio") ?? [];
   }
 }

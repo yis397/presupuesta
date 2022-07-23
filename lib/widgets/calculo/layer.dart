@@ -10,7 +10,14 @@ class CalculoLayer extends StatelessWidget {
       return Column(children: [
         HeadC(size, state.nombre!['nombre'] ?? "nom", 2, state.nombre!['img']),
         SizedBox(
-          height: size.height * (state.i == 3 ? 0.65 : 0.55),
+          height: size.height *
+              (state.i == 3
+                  ? size.height < 1950
+                      ? 70
+                      : 0.65
+                  : size.height < 1950
+                      ? .98
+                      : 0.55),
           width: size.width,
           child: Column(children: [
             Wrap(alignment: WrapAlignment.spaceBetween, children: [
@@ -22,16 +29,29 @@ class CalculoLayer extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               width: size.width,
-              height: size.height * (state.i == 3 ? 0.52 : 0.42),
+              height: size.height *
+                  (state.i == 3
+                      ? size.height < 1950
+                          ? .70
+                          : 0.52
+                      : size.height < 1950
+                          ? 0.75
+                          : 0.42),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(20),
                   color: Colors.blueGrey),
               child: Form(
                   key: context.read<CalculoBloc>().formKey,
                   child: Column(
                     children: [
                       SizedBox(
-                          height: (state.i == 3 ? 350 : 270),
+                          height: (state.i == 3
+                              ? size.height < 1950
+                                  ? 350
+                                  : 350
+                              : size.height < 1950
+                                  ? 370
+                                  : 270),
                           child: Column(
                             children: [
                               SizedBox(

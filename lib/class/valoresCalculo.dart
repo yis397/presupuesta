@@ -139,7 +139,7 @@ class ValoresCalculo {
         valores['arena']['id'] != null &&
         valores['aceroLong']['id'] != null &&
         valores['acero-anch']['id'] != null &&
-        valores['resistencia'] != '') {
+        valores['Resistencia'] != '') {
       return true;
     }
     return false;
@@ -151,7 +151,7 @@ class ValoresCalculo {
         valores['grava']['id'] != null &&
         valores['aceroLong']['id'] != null &&
         valores['estribo']['id'] != null &&
-        valores['resistencia'] != '') {
+        valores['Resistencia'] != '') {
       return true;
     }
     return false;

@@ -22,13 +22,14 @@ class TextInputs extends StatelessWidget {
   Widget build(BuildContext context) {
     final matBloc = BlocProvider.of<MaterialesBloc>(context);
     final calcBloc = BlocProvider.of<CalculoBloc>(context);
+    final recordBloc = BlocProvider.of<RecordatorioBloc>(context);
     return Container(
       margin: const EdgeInsets.only(right: 20),
       width: anch,
       child: TextFormField(
           autocorrect: false,
           keyboardType: tipo,
-          maxLength: 8,
+          maxLength: bloc == 3 ? 50 : 8,
           enableSuggestions: false,
           decoration: InputDecorations.authInputDecoration(
             hintText: nombre,
@@ -36,7 +37,9 @@ class TextInputs extends StatelessWidget {
           ),
           onChanged: (val) => (bloc == 1
               ? matBloc.setValor(nombre, val)
-              : calcBloc.setValor(nombre, val)),
+              : bloc == 2
+                  ? calcBloc.setValor(nombre, val)
+                  : recordBloc.setvalores(nombre, val)),
           validator: (value) {
             if (value != null && value.length >= val) {
             } else {

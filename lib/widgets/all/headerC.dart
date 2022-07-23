@@ -55,7 +55,8 @@ class HeadC extends StatelessWidget {
                 Container(
                     alignment: Alignment.center,
                     height: size.height * .05,
-                    width: size.width * .6,
+                    width:
+                        size.height < 1950 ? size.width * 0.5 : size.width * .6,
                     decoration: const BoxDecoration(
                         color: Color(0xffC7594A),
                         borderRadius: BorderRadius.all(Radius.circular(45))),

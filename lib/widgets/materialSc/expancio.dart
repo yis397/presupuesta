@@ -1,7 +1,10 @@
 part of "../widget.dart";
 
 class FormAdd extends StatefulWidget {
-  const FormAdd({Key? key}) : super(key: key);
+  final IconData icon;
+  final Widget data;
+  const FormAdd({Key? key, required this.icon, required this.data})
+      : super(key: key);
 
   @override
   State<FormAdd> createState() => _FormAddState();
@@ -34,13 +37,13 @@ class _FormAddState extends State<FormAdd> {
                         width: 50,
                       ),
                       Icon(
-                        Icons.add_business_outlined,
-                        size: 50,
+                        widget.icon,
+                        size: 30,
                         color: Color(colores["terciario"]!),
                       )
                     ],
                   )),
-              body: const WForm(),
+              body: widget.data,
               isExpanded: item['isExpanded'],
             ),
           )

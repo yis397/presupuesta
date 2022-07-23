@@ -42,20 +42,22 @@ class AceroAbilitado {
   void aceroTra() {}
 
   void longituAcero() {
-    double longiAcer = largo - (2 * (recubr / 100)) + (2 * (ganchoLong / 100));
-    double longiEstribo = (((base / 100) - ((recubr / 100) * 2)) * 2) +
-        (((altura / 100) - ((recubr / 100) * 2)) * 2) +
+    final recT = 2 * (recubr / 100);
+    double longiAcer = recT - (largo + (2 * (ganchoLong / 100)));
+    double longiEstribo = (((base / 100) - recT) * 2) +
+        (((altura / 100) - recT) * 2) +
         (2 * (ganchoEst / 100));
 
     totPesoaceroLong = longiAcer * numVarLong * pesoaceroLong;
     totPesoaceroEstri =
         longiEstribo * (largo / (separacionEst / 100)) * pesoaceroEstri;
+    print(totPesoaceroLong);
+    print(totPesoaceroEstri);
   }
 
   void precios() {
-    totAceroPrec = (totPesoaceroEstri * aceroEstriPrec) +
-        (totPesoaceroLong * aceroLongPrec);
-    totAceroPrec /= 1000;
+    totAceroPrec = ((totPesoaceroEstri / 1000) * aceroEstriPrec) +
+        ((totPesoaceroLong.abs() / 1000) * aceroLongPrec);
   }
 
   String textAcerLong() {
@@ -88,6 +90,7 @@ class AceroZapa {
   double precioLargo = 0;
   double totprecioAncho = 0;
   double totprecioLargo = 0;
+  double precioTotal = 0;
 
   AceroZapa({
     required this.ganchoLong,
@@ -104,17 +107,18 @@ class AceroZapa {
   }
 
   aceroAbi() {
-    longUnAncho = ((rec / 100) * 2) - ancho + ((ganchoLong / 100) * 2);
-    longUnLong = ((rec / 100) * 2) - largo + ((ganchoLong / 100) * 2);
-    totlong = ((((rec / 100) * 2) - largo) / (separacion / 100)) *
-        longUnLong *
-        pesoLargo;
-    totAnch = ((((rec / 100) * 2) - ancho) / (separacion / 100)) *
-        longUnAncho *
-        pesoAncho;
+    final numeA = ((separacion / 100) * longUnAncho).toStringAsFixed(0);
+    final numel = ((separacion / 100) * longUnLong).toStringAsFixed(0);
+    final recT = ((rec / 100) * 2);
+    longUnLong = recT - (largo + ((ganchoLong / 100) * 2));
+    longUnAncho = recT - (ancho + ((ganchoLong / 100) * 2));
 
-    totprecioAncho = totAnch * precioAncho;
-    totprecioLargo = totlong * precioLargo;
+    totlong = ((recT - largo) / (separacion / 100)) * longUnLong * pesoLargo;
+    totAnch = ((recT - ancho) / (separacion / 100)) * longUnAncho * pesoAncho;
+
+    totprecioAncho = (totAnch / 1000) * precioAncho;
+    totprecioLargo = (totlong / 1000) * precioLargo;
+    precioTotal = totprecioAncho + totprecioLargo;
   }
 
   String getPesoAceroAnch() {
@@ -126,6 +130,6 @@ class AceroZapa {
   }
 
   String getPresioAcero() {
-    return "${(totprecioAncho + totprecioLargo).toStringAsFixed(1)}/kg";
+    return "\$${(precioTotal).toStringAsFixed(1)}";
   }
 }

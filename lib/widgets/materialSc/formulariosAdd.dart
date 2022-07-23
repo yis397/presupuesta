@@ -43,7 +43,7 @@ List<List> bloques = [
             bloc: 1,
           ),
           TextInputs(
-            anch: 100,
+            anch: 90,
             nombre: 'Largo',
             val: 1,
             tipo: TextInputType.number,

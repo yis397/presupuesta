@@ -126,7 +126,7 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
         resetValor();
         break;
       case 4:
-        if (!valores.trabeValid()) {
+        if (valores.trabeValid()) {
           add(OnMensaje("Llene todos los campos"));
           break;
         }

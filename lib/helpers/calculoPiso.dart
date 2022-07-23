@@ -5,9 +5,9 @@ List<Map<String, dynamic>> calculoPiso(
   double area,
   double e,
   String resistencia,
-  Map<String, dynamic> cemento,
-  Map<String, dynamic> arena,
-  Map<String, dynamic> grava,
+  Map cemento,
+  Map arena,
+  Map grava,
 ) {
   List<Map<String, dynamic>> data = [];
 

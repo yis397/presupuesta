@@ -33,7 +33,7 @@ class LayoutMat extends StatelessWidget {
             SizedBox(
               height: size.height * .1,
             ),
-            const FormAdd(),
+            const FormAdd(data: WForm(), icon: Icons.storage),
             ListView.builder(
               shrinkWrap: true,
               itemCount: lista.length,

@@ -2,6 +2,8 @@
 
 import 'dart:async';
 
+import 'package:prestpuesta/class/recordatorio.dart';
+
 import '../db/DbHive.dart';
 
 class Materiales {
@@ -11,7 +13,9 @@ class Materiales {
   List<dynamic> _varillas = [acero];
   List<dynamic> _bloques = [bloque];
   List<dynamic> _piedras = [piedra];
-  late DbHive db;
+  List<dynamic> _recordatorios = [];
+  ListRecordatorio _record = ListRecordatorio();
+  DbHive db = DbHive();
   static final Materiales _Materiales = Materiales._internal();
 
   factory Materiales() {
@@ -26,6 +30,10 @@ class Materiales {
   List<dynamic> getVarillas() => _varillas;
   List<dynamic> getCemento() => _cementos;
   List<dynamic> getPiedras() => _piedras;
+  ListRecordatorio getRecordatorios() {
+    _record.setList(_recordatorios);
+    return _record;
+  }
 
   deletMaterial(int i, int id) {
     switch (i) {
@@ -57,14 +65,20 @@ class Materiales {
     }
   }
 
-  initDb() {
-    db = DbHive();
-    Timer(
-        const Duration(seconds: 4),
-        () => {
-              for (var i = 0; i < 6; i++)
-                {db.getMateriales(i).then((value) => setMateriales2(i, value))}
-            });
+  initDb() async {
+    bool isto = await db.init();
+    if (isto) {
+      for (var i = 0; i < 6; i++) {
+        db.getMateriales(i).then((value) => setMateriales2(i, value));
+      }
+      db.getRecordatorio().then((value) => _recordatorios = value);
+    } else {
+      print(false);
+    }
+  }
+
+  void setRecordatorio(List<Map<String, dynamic>> datos) {
+    db.setRecordatorio(datos);
   }
 
   setMateriales(int i, List<dynamic> datos) {
@@ -133,6 +147,7 @@ class Materiales {
         break;
       case 4:
         if (datos.length >= 1) {
+          _varillas = [...datos];
         } else {
           _varillas = [acero, ...datos];
         }
@@ -181,25 +196,25 @@ Map<String, dynamic> cemento = {
 Map<String, dynamic> bloque = {
   'nombre': "ladrillo/un",
   'precio': 7.0,
-  'Ancho': "14",
-  'Altura': "8",
-  'Largo': "23",
+  'Ancho': 14.0,
+  'Altura': 8.0,
+  'Largo': 23.0,
   'id': 123,
   'unidad': "un"
 };
-Map<String, dynamic> arena = {
+Map arena = {
   'nombre': "arena/ton",
   'precio': 1200.0,
   'unidad': "ton",
   'id': 12345,
 };
-Map<String, dynamic> grava = {
+Map grava = {
   'nombre': "grava/ton",
   'precio': 1200.0,
   'unidad': "ton",
   'id': 123451,
 };
-Map<String, dynamic> piedra = {
+Map piedra = {
   'nombre': "caliza/ton",
   'precio': 1200.0,
   'unidad': "ton",
@@ -211,5 +226,5 @@ Map<String, dynamic> acero = {
   'unidad': "ton",
   'id': 123456,
   'pulgada': "3/8",
-  'peso': 0.991,
+  'peso': 0.560,
 };

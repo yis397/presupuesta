@@ -6,21 +6,52 @@ class HomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    final _bloc = BlocProvider.of<RecordatorioBloc>(context);
     return Column(
       children: [
         HeaderHom(size: size),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: size.height < 1950 ? 15 : 20,
         ),
         Carrusel(size: size, lista: obraNegra, frx: .7, tipo: 2),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: size.height < 1950 ? 5 : 20,
         ),
         SizedBox(
-          height: size.height * .1,
+          height: size.height < 1950 ? size.height * 0.13 : size.height * .1,
           child: BotIcon(
               "Add Material", Icons.add_circle, 45, () => navegacion(context)),
+        ),
+        Divider(
+          height: size.height * 0.05,
+        ),
+        Container(
+          width: size.width * 0.6,
+          height: size.height * .08,
+          decoration: BoxDecoration(
+              color: Color(0xff682736),
+              borderRadius: BorderRadius.circular(20)),
+          child: Wrap(
+            alignment: WrapAlignment.spaceAround,
+            children: [
+              MaterialButton(
+                onPressed: () {},
+                child: Titulo('', 12, 3, colores["secundario"]!),
+              ),
+              Container(
+                height: size.height * .08,
+                width: 5,
+                color: Colors.white,
+              ),
+              MaterialButton(
+                onPressed: () => {
+                  _bloc.init(),
+                  Navigator.pushNamed(context, "recuerda"),
+                },
+                child: Titulo('Recuerda', 12, 3, colores["secundario"]!),
+              )
+            ],
+          ),
         )
       ],
     );
@@ -45,7 +76,7 @@ class HeaderHom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: AlignmentDirectional.bottomCenter,
-      height: size.height * .4,
+      height: size.height < 1950 ? size.height * 0.3 : size.height * .4,
       width: size.width,
       decoration: BoxDecoration(
           color: Color(colores["primario"]!),

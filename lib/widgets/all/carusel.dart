@@ -91,7 +91,7 @@ class ItemHome extends StatelessWidget {
     final matBloc = BlocProvider.of<CalculoBloc>(context);
     final size = MediaQuery.of(context).size;
     return SizedBox(
-        height: size.height * .3,
+        height: size.height * .2,
         width: size.width * .7,
         child: MaterialButton(
             onPressed: () {
@@ -115,7 +115,7 @@ class ItemHome extends StatelessWidget {
                     ),
                   )),
               Container(
-                margin: const EdgeInsets.only(top: 180),
+                margin: EdgeInsets.only(top: size.height < 1950 ? 130 : 180),
                 width: size.width * .6,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),

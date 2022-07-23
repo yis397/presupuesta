@@ -93,7 +93,7 @@ List<Map<String, dynamic>> calculoZapataI(
     },
     {
       "titulo": "Total Precio",
-      "data": zapata.getPresioAcero() + concreto.textTotal(),
+      "data": (zapata.precioTotal + concreto.totalPrecio).toStringAsFixed(2),
       "color": 0xffa95b4f
     },
   ];
