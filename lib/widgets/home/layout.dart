@@ -19,8 +19,8 @@ class HomeLayout extends StatelessWidget {
         ),
         SizedBox(
           height: size.height < 1950 ? size.height * 0.13 : size.height * .1,
-          child: BotIcon(
-              "Add Material", Icons.add_circle, 45, () => navegacion(context)),
+          child: BotIcon("Agrega Material", Icons.add_circle, 45,
+              () => navegacion(context)),
         ),
         Divider(
           height: size.height * 0.05,
@@ -29,7 +29,7 @@ class HomeLayout extends StatelessWidget {
           width: size.width * 0.6,
           height: size.height * .08,
           decoration: BoxDecoration(
-              color: Color(0xff682736),
+              color: const Color(0xff682736),
               borderRadius: BorderRadius.circular(20)),
           child: Wrap(
             alignment: WrapAlignment.spaceAround,
@@ -76,7 +76,7 @@ class HeaderHom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: AlignmentDirectional.bottomCenter,
-      height: size.height < 1950 ? size.height * 0.3 : size.height * .4,
+      height: size.height < 800 ? size.height * 0.3 : size.height * .4,
       width: size.width,
       decoration: BoxDecoration(
           color: Color(colores["primario"]!),

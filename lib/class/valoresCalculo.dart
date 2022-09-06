@@ -42,7 +42,6 @@ class ValoresCalculo {
       case 1:
         return {
           'alto': double.parse(valores['Altura']),
-          'bloque': valores['bloque'],
           'arena': valores['arena'],
           'cemento': valores['cemento'],
           'grava': valores['grava'],
@@ -85,10 +84,10 @@ class ValoresCalculo {
           'grava': valores['grava'],
           'resistencia': valores['Resistencia'],
           'tipo': '2',
-          'h2': double.parse(valores['h2']),
-          'h3': double.parse(valores['h3']),
-          'a1': double.parse(valores['a1']),
-          'b1': double.parse(valores['b1']),
+          'h2': double.parse(valores['h2']) / 100,
+          'h3': double.parse(valores['h3']) / 100,
+          'a1': double.parse(valores['a1']) / 100,
+          'b1': double.parse(valores['b1']) / 100,
         };
       case 4:
         return {
@@ -126,31 +125,29 @@ class ValoresCalculo {
   }
 
   bool muroValid() {
-    if (valores['bloque']['id'] != null &&
-        valores['cemento']['id'] != null &&
-        valores['arena']['id'] != null) {
+    if (valores['bloque'] != null &&
+        valores['cemento'] != null &&
+        valores['arena'] != null) {
       return true;
     }
     return false;
   }
 
   bool zapataValid() {
-    if (valores['cemento']['id'] != null &&
-        valores['arena']['id'] != null &&
-        valores['aceroLong']['id'] != null &&
-        valores['acero-anch']['id'] != null &&
+    if (validGlobal() &&
+        valores['aceroLong'] != null &&
+        valores['acero-anch'] != null &&
         valores['Resistencia'] != '') {
       return true;
     }
+
     return false;
   }
 
   bool trabeValid() {
-    if (valores['cemento']['id'] != null &&
-        valores['arena']['id'] != null &&
-        valores['grava']['id'] != null &&
-        valores['aceroLong']['id'] != null &&
-        valores['estribo']['id'] != null &&
+    if (validGlobal() &&
+        valores['aceroLong'] != null &&
+        valores['estribo'] != null &&
         valores['Resistencia'] != '') {
       return true;
     }
@@ -158,9 +155,16 @@ class ValoresCalculo {
   }
 
   bool concretoValid() {
-    if (valores['grava']['id'] != null &&
-        valores['cemento']['id'] != null &&
-        valores['arena']['id'] != null) {
+    if (validGlobal() && valores['Resistencia'] != '') {
+      return true;
+    }
+    return false;
+  }
+
+  bool validGlobal() {
+    if (valores['grava'] != null &&
+        valores['cemento'] != null &&
+        valores['arena'] != null) {
       return true;
     }
     return false;

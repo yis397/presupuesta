@@ -21,7 +21,6 @@ class DbHive {
     hive.init(directori.path);
     box = await hive.openBox('materiales');
     if (!box.containsKey(1)) {
-      print(box);
       return true;
     } else {
       return false;

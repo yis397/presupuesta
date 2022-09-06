@@ -12,7 +12,7 @@ class WResulatdo extends StatelessWidget {
     if (datos.isEmpty) {
       return const Center(
         child: SizedBox(
-          child: Text("As un calculo"),
+          child: Text("No has hecho un calculo"),
         ),
       );
     }

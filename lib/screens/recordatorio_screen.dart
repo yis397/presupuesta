@@ -16,7 +16,15 @@ class RecordatorioScreen extends StatelessWidget {
       child: BlocBuilder<RecordatorioBloc, RecordatorioState>(
         builder: (context, state) {
           return Column(children: [
-            HeadC(size, 'Recordatorio', 1, 'assets/img/muro.jpg'),
+            HeadC(
+              size,
+              'Recordatorio',
+              1,
+              'assets/img/muro.jpg',
+              'Agregue un recordatorio',
+              height: .25,
+              height2: .1,
+            ),
             FormAdd(
               icon: Icons.edit,
               data: Form(
@@ -114,7 +122,6 @@ class _MyCheckBox extends State<MyCheckBox> {
               widget.context
                   .read<RecordatorioBloc>()
                   .setvalores('isNotificacion', value);
-              print(value);
             });
             if (value!) {
               DateTime? newDate = await showDatePicker(
@@ -129,6 +136,7 @@ class _MyCheckBox extends State<MyCheckBox> {
                 final date = newDate
                     .add(Duration(hours: picked!.hour, minutes: picked.minute));
 
+                // ignore: use_build_context_synchronously
                 widget.context
                     .read<RecordatorioBloc>()
                     .setvalores('date', date);

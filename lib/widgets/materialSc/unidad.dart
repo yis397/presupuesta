@@ -17,6 +17,7 @@ class _UnidadState extends State<Unidad> {
   @override
   Widget build(BuildContext context) {
     final matBloc = BlocProvider.of<MaterialesBloc>(context);
+    final calculoBloc = BlocProvider.of<CalculoBloc>(context);
     return DropdownButton<String>(
       hint: Column(
         children: [
@@ -34,8 +35,9 @@ class _UnidadState extends State<Unidad> {
       onChanged: (String? newValue) {
         setState(() {
           dropdownValue = newValue!;
-
-          matBloc.setValor(widget.nombre, newValue);
+          widget.nombre == 'Resist'
+              ? calculoBloc.setValor('Resistencia', newValue)
+              : matBloc.setValor(widget.nombre, newValue);
         });
       },
       items: widget.lista.map((dynamic value) {

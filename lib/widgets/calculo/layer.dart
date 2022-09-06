@@ -8,21 +8,24 @@ class CalculoLayer extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return BlocBuilder<CalculoBloc, CalculoState>(builder: (context, state) {
       return Column(children: [
-        HeadC(size, state.nombre!['nombre'] ?? "nom", 2, state.nombre!['img']),
+        HeadC(size, state.nombre!['nombre'] ?? "nom", 2, state.nombre!['img'],
+            state.nombre!['datos'],
+            height: size.height < 800 ? .32 : .28,
+            height2: size.height < 800 ? .18 : .14),
         SizedBox(
           height: size.height *
               (state.i == 3
-                  ? size.height < 1950
+                  ? size.height < 800
                       ? 70
                       : 0.65
-                  : size.height < 1950
+                  : size.height < 800
                       ? .98
                       : 0.55),
           width: size.width,
           child: Column(children: [
             Wrap(alignment: WrapAlignment.spaceBetween, children: [
               Titulo("Ingrese Datos", 20, 7, colores["primario"]!),
-              BotIcon("", Icons.ads_click_sharp, 25,
+              BotIcon("", Icons.help, 25,
                   () => _showMyDialog(context, state.nombre!['ayuda']))
             ]),
             Titulo(state.msg ?? "", 20, 2, colores["primario"]!),
@@ -31,26 +34,26 @@ class CalculoLayer extends StatelessWidget {
               width: size.width,
               height: size.height *
                   (state.i == 3
-                      ? size.height < 1950
-                          ? .70
+                      ? size.height < 800
+                          ? .80
                           : 0.52
-                      : size.height < 1950
+                      : size.height < 800
                           ? 0.75
                           : 0.42),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.blueGrey),
+                  color: Colors.deepOrange.shade50),
               child: Form(
                   key: context.read<CalculoBloc>().formKey,
                   child: Column(
                     children: [
                       SizedBox(
                           height: (state.i == 3
-                              ? size.height < 1950
-                                  ? 350
+                              ? size.height < 800
+                                  ? 400
                                   : 350
-                              : size.height < 1950
-                                  ? 370
+                              : size.height < 800
+                                  ? 350
                                   : 270),
                           child: Column(
                             children: [
@@ -83,7 +86,7 @@ class CalculoLayer extends StatelessWidget {
                             decoration: BoxDecoration(
                                 color: Color((colores["terciario"]!)),
                                 borderRadius: BorderRadius.circular(50)),
-                            child: Titulo("Guardar", 15, 4, 0xffFFFFFF),
+                            child: Titulo("Calcula", 15, 4, 0xffFFFFFF),
                           )),
                     ],
                   )),
@@ -106,23 +109,20 @@ Future<void> _showMyDialog(context, img) async {
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('AlertDialog Title'),
+        title: const Text('Ayuda'),
         content: SingleChildScrollView(
           child: ListBody(
             children: [
               Container(
-                  height: 200,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.amber,
+                  height: 250,
+                  width: 250,
+                  decoration: const BoxDecoration(
+                    color: Colors.white38,
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
                     child: FadeInImage(
                       placeholder: AssetImage(img),
                       image: AssetImage(img),
-                      fit: BoxFit.cover,
                     ),
                   )),
             ],

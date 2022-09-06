@@ -6,8 +6,12 @@ class HeadC extends StatelessWidget {
   final int tipo;
   final String text1;
   final String img;
+  final String dato;
+  final double height;
+  final double height2;
 
-  const HeadC(this.size, this.text1, this.tipo, this.img, {Key? key})
+  const HeadC(this.size, this.text1, this.tipo, this.img, this.dato,
+      {Key? key, this.height = .38, this.height2 = .23})
       : super(key: key);
 
   @override
@@ -15,17 +19,17 @@ class HeadC extends StatelessWidget {
     final calBloc = BlocProvider.of<CalculoBloc>(context);
     return SizedBox(
       width: size.width,
-      height: size.height * .27,
+      height: size.height * height,
       child: Stack(children: [
         Column(
           children: [
             intStack(size, img),
             SizedBox(
-              height: size.height * .13,
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-                child: Text(
-                    "Sint non anim deserunt nostrud nisi officia consequat esse voluptate minim veniam.Sint non anim deserunt nostrud nisi officia consequat esse voluptate minim veniam."),
+              height: size.height * height2,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                child: Text(dato),
               ),
             )
           ],
@@ -41,7 +45,9 @@ class HeadC extends StatelessWidget {
                 MaterialButton(
                   onPressed: () => {
                     if (tipo != 1) {calBloc.add(OnReset())},
-                    Navigator.pop(context)
+                    FocusManager.instance.primaryFocus?.unfocus(),
+                    Timer(const Duration(seconds: 1),
+                        () => Navigator.pop(context))
                   },
                   child: const Icon(
                     Icons.arrow_back_ios,
@@ -60,7 +66,7 @@ class HeadC extends StatelessWidget {
                     decoration: const BoxDecoration(
                         color: Color(0xffC7594A),
                         borderRadius: BorderRadius.all(Radius.circular(45))),
-                    child: Titulo(text1, 20, 3, 0xffFFDF7A))
+                    child: Titulo(text1, 15, 3, 0xffFFDF7A))
               ],
             )
           ],
@@ -80,6 +86,7 @@ class intStack extends StatelessWidget {
     return Container(
       height: size.height * .14,
       decoration: BoxDecoration(
+          color: Colors.orangeAccent,
           image: DecorationImage(
             image: AssetImage(img),
             fit: BoxFit.cover,

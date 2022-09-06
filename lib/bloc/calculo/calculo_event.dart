@@ -28,18 +28,33 @@ class OnCalculoMuro extends CalculoEvent {
     calculo();
   }
   calculo() {
-    respuesta = calculoMuro(
-        datos['bloque']['Largo'],
-        datos['bloque']['Altura'],
-        datos['ly'],
-        datos['bloque']['Ancho'],
-        datos['area'],
-        datos['bloque']['unidad'],
-        datos['bloque']['precio'],
-        datos['cemento']['unidad'],
-        datos['cemento']['precio'],
-        datos['arena']['unidad'],
-        datos['arena']['precio']);
+    try {
+      respuesta = calculoMuro(
+          datos['bloque']['Largo'],
+          datos['bloque']['Altura'],
+          datos['ly'],
+          datos['bloque']['Ancho'],
+          datos['area'],
+          datos['bloque']['unidad'],
+          datos['bloque']['precio'],
+          datos['cemento']['unidad'],
+          datos['cemento']['precio'],
+          datos['arena']['unidad'],
+          datos['arena']['precio']);
+    } catch (e) {
+      respuesta = calculoMuro(
+          double.parse(datos['bloque']['Largo']),
+          double.parse(datos['bloque']['Altura']),
+          datos['ly'],
+          double.parse(datos['bloque']['Ancho']),
+          datos['area'],
+          datos['bloque']['unidad'],
+          datos['bloque']['precio'],
+          datos['cemento']['unidad'],
+          datos['cemento']['precio'],
+          datos['arena']['unidad'],
+          datos['arena']['precio']);
+    }
   }
 }
 

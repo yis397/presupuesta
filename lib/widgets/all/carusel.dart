@@ -104,7 +104,7 @@ class ItemHome extends StatelessWidget {
                   width: 300,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    color: Colors.amber,
+                    color: Colors.white24,
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
@@ -115,12 +115,14 @@ class ItemHome extends StatelessWidget {
                     ),
                   )),
               Container(
-                margin: EdgeInsets.only(top: size.height < 1950 ? 130 : 180),
-                width: size.width * .6,
+                margin: EdgeInsets.only(top: size.height < 800 ? 130 : 180),
+                width: size.width * .7,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20)),
                     color: Color(colores["terciario"]!)),
-                child: Titulo(titulo, 14, 3, colores["secundario"]!),
+                child: Titulo('.$titulo', 14, 3, colores["secundario"]!),
               )
             ])));
   }

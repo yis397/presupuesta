@@ -51,8 +51,6 @@ class AceroAbilitado {
     totPesoaceroLong = longiAcer * numVarLong * pesoaceroLong;
     totPesoaceroEstri =
         longiEstribo * (largo / (separacionEst / 100)) * pesoaceroEstri;
-    print(totPesoaceroLong);
-    print(totPesoaceroEstri);
   }
 
   void precios() {
@@ -107,8 +105,8 @@ class AceroZapa {
   }
 
   aceroAbi() {
-    final numeA = ((separacion / 100) * longUnAncho).toStringAsFixed(0);
-    final numel = ((separacion / 100) * longUnLong).toStringAsFixed(0);
+/*     final numeA = ((separacion / 100) * longUnAncho).toStringAsFixed(0);
+    final numel = ((separacion / 100) * longUnLong).toStringAsFixed(0); */
     final recT = ((rec / 100) * 2);
     longUnLong = recT - (largo + ((ganchoLong / 100) * 2));
     longUnAncho = recT - (ancho + ((ganchoLong / 100) * 2));

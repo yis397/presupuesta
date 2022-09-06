@@ -36,6 +36,11 @@ class MaterialesBloc extends Bloc<MaterialesEvent, MaterialesState> {
   }
 
   setValores() {
+    if (state.materiales!.length == 5) {
+      resetValor();
+      formKey.currentState?.reset();
+      return;
+    }
     final material = selectMaterial(state.i!, valores);
     materiales.setMateriales(state.i!, [material]);
     add(OnAddMaterila(materiales.getMateriales(state.i!)));

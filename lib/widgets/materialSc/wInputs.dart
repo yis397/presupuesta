@@ -40,12 +40,12 @@ class WForm extends StatelessWidget {
                             borderRadius: BorderRadius.circular(50)),
                         child: Titulo("Guardar", 15, 4, 0xffFFFFFF),
                       )),
-                  MaterialButton(
+                  /*  MaterialButton(
                     onPressed: () {
                       context.read<MaterialesBloc>().delet();
                     },
                     child: const Text("CLICK"),
-                  )
+                  ) */
                 ],
               )),
         );

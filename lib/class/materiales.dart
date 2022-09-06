@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_is_empty, non_constant_identifier_names
 
-import 'dart:async';
-
 import 'package:prestpuesta/class/recordatorio.dart';
 
 import '../db/DbHive.dart';
@@ -72,8 +70,6 @@ class Materiales {
         db.getMateriales(i).then((value) => setMateriales2(i, value));
       }
       db.getRecordatorio().then((value) => _recordatorios = value);
-    } else {
-      print(false);
     }
   }
 

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -26,7 +24,6 @@ class RecordatorioBloc extends Bloc<RecordatorioEvent, RecordatorioState> {
   RecordatorioBloc() : super(RecordatorioState()) {
     tz.initializeTimeZones();
     on<RecordatorioEvent>((event, emit) {
-      // TODO: implement event handler
       if (event is OnAddRecordatorio) {
         emit(state.copyWith(recordatorios: event.recordatorios));
       } else if (event is OnDeletRecordatorio) {

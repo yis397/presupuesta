@@ -25,8 +25,9 @@ class _FormAddState extends State<FormAdd> {
           .map(
             (item) => ExpansionPanel(
               canTapOnHeader: true,
-              backgroundColor:
-                  item['isExpanded'] == true ? Colors.cyan[100] : Colors.white,
+              backgroundColor: item['isExpanded'] == true
+                  ? Colors.deepOrange.shade50
+                  : Colors.white,
               headerBuilder: (_, isExpanded) => Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 30),

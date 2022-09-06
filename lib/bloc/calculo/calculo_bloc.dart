@@ -105,9 +105,9 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
 
         break;
       case 1:
-        if (!isValidForm() && !valores.concretoValid()) {
+        if (!valores.concretoValid()) {
           add(OnMensaje("Llene todos los campos"));
-          return;
+          break;
         }
         add(OnCalculoPiso(datos: valores.getValor(1)));
         add(OnMensaje(""));
@@ -115,9 +115,10 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
         break;
       case 2:
       case 3:
-        if (valores.zapataValid()) {
+        if (!valores.zapataValid()) {
           add(OnMensaje("Llene todos los campos"));
-          return;
+
+          break;
         }
         state.i == 2
             ? add(OnCalculoZapata(valores.getValor(2)))
@@ -126,7 +127,7 @@ class CalculoBloc extends Bloc<CalculoEvent, CalculoState> {
         resetValor();
         break;
       case 4:
-        if (valores.trabeValid()) {
+        if (!valores.trabeValid()) {
           add(OnMensaje("Llene todos los campos"));
           break;
         }

@@ -9,6 +9,7 @@ import 'helpers/notification_service.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().initNotification();
+
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(

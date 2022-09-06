@@ -1,7 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:timezone/timezone.dart' as tz;
-import 'package:timezone/data/latest.dart' as tz;
 
 class NotificationService {
   static final NotificationService _notificationService =
@@ -18,7 +17,7 @@ class NotificationService {
 
   Future<void> initNotification() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@drawable/ic_flutternotification');
+        AndroidInitializationSettings('@drawable/ic_stat_name');
 
     const IOSInitializationSettings initializationSettingsIOS =
         IOSInitializationSettings(
@@ -49,7 +48,7 @@ class NotificationService {
         android: AndroidNotificationDetails('main_channel', 'Main Channel',
             importance: Importance.max,
             priority: Priority.max,
-            icon: '@drawable/ic_stat_access_time'),
+            icon: '@drawable/ic_stat_name'),
         iOS: IOSNotificationDetails(
           sound: 'default.wav',
           presentAlert: true,

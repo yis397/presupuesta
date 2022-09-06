@@ -20,7 +20,15 @@ class LayoutMat extends StatelessWidget {
 
         return Column(
           children: [
-            HeadC(size, "titulo", 1, 'assets/img/muro.jpg'),
+            HeadC(
+              size,
+              "Materiales",
+              1,
+              'assets/img/muro.jpg',
+              'Agrege los materiales que utilizará para los calculos, el campo unidad significa la unidad que es comprado. Nota: solo se permitiran 5 de cada categoria',
+              height: .30,
+              height2: .15,
+            ),
             SizedBox(
               height: size.height * .07,
               child: Carrusel(
